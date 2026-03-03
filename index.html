@@ -1,89 +1,786 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pack Your Bags</title>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.10.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.10.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.10.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.10.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.10.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.10.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.10.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.10.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.10.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.10.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="pyb.css">
+</head>
+<body>
+    
+
+<header>
+
+    <div id="menu-bar" class="fas fa-bars"></div>
+
+    <a href="index.html" class="logo"><span>p</span>ack <span>y</span>our <span>b</span>ags</a>
+
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#book">book</a>
+        <a href="#packages">packages</a>
+        <a href="#services">services</a>
+        <a href="#gallery">gallery</a>
+        <a href="#review">reviews</a>
+        <a href="#contact">contact</a>
+    </nav>
+
+    <div class="icons">
+        <i class="fas fa-search" id="search-btn"></i>
+        <i class="fas fa-user-circle" id="profile-btn"></i>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+    <form action="" class="search-bar-container">
+        <input type="search" id="search-bar" placeholder="search here...">
+        <label for="search-bar" class="fas fa-search"></label>
+        
+    </form>
+
+    <div class="profile-popup" id="profile-popup">
+        <h3>My Profile</h3>
+        <div class="profile-box">
+            <p class="profile-name">Hello, Traveler</p>
+            <a href="account.html">Manage Account</a>
+            <a href="cart.html">Cart</a>
+        </div>
+    </div>
+</header>
+
+<section class="home" id="#home">
+    <div class="content">
+        <h3><span>w</span>ork. <span>s</span>ave. <span>t</span>ravel. <span>r</span>epeat.</h3>
+        <p>not all those who wander are lost.</p>
+        <a href="#" class="btn">discover more </a>
+    </div>
+    <div class="controls">
+        <span class="vid-btn active" data-src="images/vid1.mp4" ></span>
+        <span class="vid-btn" data-src="images/vid2.mp4" ></span>
+        <span class="vid-btn" data-src="images/vid3.mp4" ></span>
+        <span class="vid-btn" data-src="images/vid4.mp4" ></span>
+        <span class="vid-btn " data-src="images/vid5.mp4" ></span>
+
+    </div>
+
+    <div class="video-container">
+        <video src="images/vid1.mp4" id="video-slider" loop autoplay muted ></video>
+    </div>
+</section>
+
+<section class="book" id="book">
+
+    <h1 class="heading">
+        <span>b</span>
+        <span>o</span>
+        <span>o</span>
+        <span>k</span>
+        <span class="space"></span>
+        <span>n</span>
+        <span>o</span>
+        <span>w</span>
+    </h1>
+
+    <div class="row">
+        <div class="image">
+            <img src="images/b1.jpg" alt="">
+        </div>
+
+        <form action="">
+            <div class="inputbox">
+                <h3>where to</h3>
+                <input type="text" placeholder="place name" >
+            </div> 
+            <div class="inputbox">
+                <h3>how many</h3>
+                <input type="number" placeholder="number of people">
+            </div> 
+            <div class="inputbox">
+                <h3>arrivals</h3>
+                <input type="date">
+            </div> 
+            <div class="inputbox">
+                <h3>depatures</h3>
+                <input type="date">
+            </div> 
+            <button type="submit" class="btn" id="form-book-btn">Book nowr</button>
+            </form>
+    </div>
+
+
+</section>
+
+<section class="packages" id="packages">
+    <h1 class="heading">
+        <span>p</span>
+        <span>a</span>
+        <span>c</span>
+        <span>k</span>
+        <span>a</span>
+        <span>g</span>
+        <span>e</span>
+        <span>s</span>
+    </h1>
+
+    <div class="box-container">
+
+        
+
+        <div class="box">
+            <img src="images/p2.jpg" alt="">
+            <div class="content">
+                <h3><i class="fas fa-map-marker-alt"></i> Pondicherry</h3>
+                <p>Experience the unique blend of French and Indian cultures in Pondicherry, with its charming streets and beautiful beaches.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="price">
+                    ₹6999.00 <span>₹11999.00</span>
+                    <a href="pondi.html" class="btn">book now</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="box">
+            <img src="images/m11.jpeg" alt="">
+            <div class="content">
+                <h3><i class="fas fa-map-marker-alt"></i> Manali</h3>
+                <p>Experience the breathtaking landscapes and adventure sports in Manali, a popular hill station in India.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="price">
+                    ₹19999.00 <span>₹30000.00</span>
+                    <a href="manali.html" class="btn">book now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="images/c10.jpeg" alt="">
+            <div class="content">
+                <h3><i class="fas fa-map-marker-alt"></i> Coorg</h3>
+                <p>Discover the lush green hills and coffee plantations of Coorg, perfect for nature lovers and adventure seekers alike.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="price">
+                    ₹9999.00 <span>₹14999.00</span>
+                    <a href="coorg.html" class="btn">book now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="images/p6.jpg" alt="">
+            <div class="content">
+                <h3><i class="fas fa-map-marker-alt"></i> varanasi</h3>
+                <p>Experience the spiritual heart of India in Varanasi, where ancient traditions meet vibrant culture along the sacred Ganges River.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="price">
+                    ₹11999.00 <span>₹19999.00</span>
+                    <a href="varanasi.html" class="btn">book now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+
+<section class="services" id="services">
+    <h1 class="heading">
+        <span>s</span>
+        <span>e</span>
+        <span>r</span>
+        <span>v</span>
+        <span>i</span>
+        <span>c</span>
+        <span>e</span>
+        <span>s</span>
+    </h1>
+
+    <div class="box-container">
+        <div class="box">
+            <i class="fas fa-hotel"></i>
+            <h3>Affordable Hotels</h3>
+            <p>Find comfortable and affordable hotels to suit every budget, ensuring a pleasant stay wherever you travel.</p>
+
+        </div>
+        <div class="box">
+            <i class="fas fa-utensils"></i>
+            <h3>Food and Drinks</h3>
+            <p>Enjoy a variety of delicious local cuisines and refreshing drinks at your destination, curated for every taste and preference.</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-bullhorn"></i>
+            <h3>Safety Guide</h3>
+            <p>Your safety is our priority. Get expert travel tips, emergency contacts, and up-to-date guidance to ensure a secure and enjoyable journey.</p>
+        </div>
+
+        <div class="box">
+        <i class="fas fa-plane"></i>
+        <h3>Fastest Travel</h3>
+        <p>Reach your destination quickly and comfortably with our fastest travel options, ensuring you make the most of your time.</p>
+        </div>
+         <div class="box">
+                <i class="fas fa-star"></i>
+                    <h3>Customised Trip Planning</h3>
+                    <p>Plan your trip your way! Get personalized itineraries, expert recommendations, and flexible options tailored to your interests and budget.</p>
+                </div>
+        <div class="box">
+        <i class="fas fa-hiking"></i>
+            <h3>Adventures</h3>
+            <p>Embark on thrilling adventures like trekking, rafting, and wildlife safaris for an unforgettable travel experience.</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-user-shield"></i>
+                <h3>Safe for Women</h3>
+                <p>We prioritize women's safety with trusted partners, secure accommodations, and 24/7 support for a worry-free travel experience.</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-star"></i>
+                    <h3>Most Rated</h3>
+                    <p>Our website is trusted and highly rated by thousands of travelers for its reliability, user-friendly experience, and top-notch service.</p>
+                </div>
+    </div>
+
+
+</section>
+
+<section class="gallery" id="gallery">
+    <h1 class="heading">
+        <span>g</span>
+        <span>a</span>
+        <span>l</span>
+        <span>l</span>
+        <span>e</span>
+        <span>r</span>
+        <span>y</span>
+    </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="images/g1.jpg" alt="">
+            <div class="content">
+                <h3>Amazing Places</h3>
+                <p>Explore amazing places that inspire adventure and wonder, offering unforgettable experiences for every traveler.</p>
+                <a href="#" class="btn">see more</a>
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/g2.jpg" alt="">
+            <div class="content">
+                <h3>Amazing Places</h3>
+                <p>Explore breathtaking destinations and capture unforgettable memories at these amazing places around the world.</p>
+                <a href="#" class="btn">see more</a>
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/g3.jpg" alt="">
+            <div class="content">
+                <h3>Amazing Places</h3>
+                <p>Discover hidden gems and breathtaking views at these amazing places, perfect for your next adventure.</p>
+                <a href="#" class="btn">see more</a>
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/g4.jpg" alt="">
+            <div class="content">
+                <h3>Amazing Places</h3>
+                <p>Marvel at the wonders of nature and culture at these amazing places, each offering a unique and unforgettable experience.</p>
+                <a href="#" class="btn">see more</a>
+            </div>
+        </div>
+         <div class="box">
+            <img src="images/g5.jpg" alt="">
+            <div class="content">
+                <h3>Amazing Places</h3>
+                <p>Discover amazing places around the country, each offering unique experiences and breathtaking views for every traveler.</p>
+                <a href="#" class="btn">see more</a>
+            </div>
+        </div> <div class="box">
+            <img src="images/g6.jpg" alt="">
+            <div class="content">
+                <h3>Amazing Places</h3>
+                <p>Experience the beauty and diversity of amazing places, each offering unique adventures and unforgettable memories for every traveler.</p>
+                <a href="#" class="btn">see more</a>
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/g7.jpg" alt="">
+            <div class="content">
+                <h3>Amazing Places</h3>
+                <p>Experience the magic of amazing places, where every journey brings new adventures and unforgettable memories for travelers of all kinds.</p>
+                <a href="#" class="btn">see more</a>
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/g8.jpg" alt="">
+            <div class="content">
+                <h3>Amazing Places</h3>
+                <p>Discover amazing places that inspire awe and wonder, offering unforgettable experiences and breathtaking scenery for every traveler.</p>
+                <a href="#" class="btn">see more</a>
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/c10.jpeg" alt="">
+            <div class="content">
+                <h3>Amazing Places</h3>
+                <p>Explore the wonders of nature and culture at these amazing places, each offering unique experiences and unforgettable adventures for every traveler.</p>
+                <a href="#" class="btn">see more</a>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+ <section class="reviews" id="reviews">
+    <h1 class="heading">
+        <span>r</span>
+        <span>e</span>
+        <span>v</span>
+        <span>i</span>
+        <span>e</span>
+        <span>w</span>
+        <span>s</span>
+    </h1>
+
+    <div class="container-slider review-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+                <div class="box">
+                    <h3>rahul</h3>
+                    <p>This website is amazing! The booking process was seamless, the deals were unbeatable, and the customer support was excellent. I highly recommend it to anyone planning their next trip!</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <h3>navaneetha</h3>
+                    <p>This website is outstanding! The booking process was quick and easy, and I found the best travel deals. The customer support was responsive and helpful. I highly recommend it to anyone planning their next adventure!</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <h3>anil</h3>
+                    <p>This website made my travel planning so much easier! The interface is simple to use, and I found great deals on destinations. Highly recommended for anyone looking to book a trip!</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <h3>madhavi</h3>
+                    <p>This website exceeded my expectations! The booking process was seamless, and I found great travel deals. I highly recommend it to anyone looking for a hassle-free travel experience.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <h3>prashid</h3>
+                    <p>This website made booking my vacation so easy! The interface is user-friendly, and I found great deals on amazing destinations. Highly recommended for stress-free travel planning!</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <h3>vijayalaxmi</h3>
+                    <p>This website is fantastic! The user interface is intuitive, and I was able to book my trip quickly and easily. Highly recommended for anyone planning their travels!</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <h3>anirudh</h3>
+                    <p>This is the best travel website I've ever used! The interface is intuitive, the deals are fantastic, and the customer service is top-notch. I wouldn't book my trips anywhere else!</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="box">
+                    <h3>rujula</h3>
+                    <p>This website made planning my trip so easy! The booking process was smooth, and I found all the information I needed. Highly recommended for travelers!</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+
+<section class="contact" id="contact">
+    
+    <h1 class="heading">
+        <span>c</span>
+        <span>o</span>
+        <span>n</span>
+        <span>t</span>
+        <span>a</span>
+        <span>c</span>
+        <span>t</span>
+    </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="images/i1.jpg" alt="">
+        </div>
+
+        <form action="">
+            <div class="inputbox">
+                <input type="text" placeholder="name">
+                <input type="email" placeholder="email">
+            </div>
+            <div class="inputbox">
+                <input type="number" placeholder="number">
+                <input type="text" placeholder="subject">
+            </div>
+            <textarea placeholder="message" name="" id="" cols="30" rows="10" ></textarea>
+             <button type="submit" class="btn" id="contact-btn">send message</button>
+        </form>
+
+
+    </div>
+
+</section>
+
+
+<section class="brand-container">
+
+    <div class="swiper-container brand-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/1.png" alt=""></div>
+            <div class="swiper-slide"><img src="images/2.png" alt=""></div>
+            <div class="swiper-slide"><img src="images/3.png" alt=""></div>
+            <div class="swiper-slide"><img src="images/4.jpeg" alt=""></div>
+            <div class="swiper-slide"><img src="images/5.png" alt=""></div>
+            <div class="swiper-slide"><img src="images/6.png" alt=""></div>
+        </div>
+    </div>
+
+</section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot</title>
+  <style>
+    /* Chatbot Styles */
+    #chatbot {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      z-index: 1001;
+    }
+
+    .chat-header {
+      background-color: #ffa500;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .chat-body {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+      height: 200px;
+      background: #f9f9f9;
+    }
+
+    .chat-input-area {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    .chat-input-area input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 1.2rem;
+      outline: none;
+    }
+
+    .chat-input-area button {
+      background-color: #ffa500;
+      color: white;
+      border: none;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    #chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ffa500;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1002;
+    }
+
+    .user-message, .bot-message {
+      margin: 5px 0;
+      padding: 8px 12px;
+      border-radius: 20px;
+      max-width: 80%;
+      font-size: 1.1rem;
+      word-wrap: break-word;
+    }
+
+    .user-message {
+      background-color: #DCF8C6;
+      align-self: flex-end;
+      text-align: right;
+    }
+
+    .bot-message {
+      background-color: #EEE;
+      align-self: flex-start;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Chatbot Structure -->
+<div id="chatbot" class="chatbot">
+  <div class="chat-header">Chat with us</div>
+  <div class="chat-body" id="chat-body">
+    <div class="bot-message">Hi! I'm XYZ, your chat assistant. How can I help?</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="user-input" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+<button id="chat-toggle" onclick="toggleChat()">💬</button>
+
+<!-- Chatbot Script -->
+<script>
+  function toggleChat() {
+    const chat = document.getElementById("chatbot");
+    chat.style.display = chat.style.display === "none" || chat.style.display === "" ? "flex" : "none";
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("user-input");
+    const message = input.value.trim();
+    if (message === "") return;
+
+    const chatBody = document.getElementById("chat-body");
+
+    const userMessage = document.createElement("div");
+    userMessage.className = "user-message";
+    userMessage.textContent = message;
+    chatBody.appendChild(userMessage);
+
+    const botReply = document.createElement("div");
+    botReply.className = "bot-message";
+    botReply.textContent = getBotReply(message);
+    chatBody.appendChild(botReply);
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+    input.value = "";
+  }
+
+  function getBotReply(input) {
+    const text = input.toLowerCase();
+
+    if (text.includes("itinerary") || text.includes("plan")) {
+      return "🗓️ It's a 3-day tour covering Tambaram, Pondicherry, Auroville, Paradise Beach, French colony, Rock Beach, Mahabalipuram, and more!";
+    }
+
+    if (text.includes("pondicherry") && (text.includes("price") || text.includes("cost"))) {
+      return "💰 The Pondicherry tour is ₹6999, down from ₹11999. Limited slots!";
+    }
+
+    if (text.includes("manali") && (text.includes("price") || text.includes("cost"))) {
+      return "💰 The Manali tour is ₹8499, down from ₹13499. Includes snow activities!";
+    }
+
+    if (text.includes("varanasi") && (text.includes("price") || text.includes("cost"))) {
+      return "💰 The Varanasi tour is ₹7599, including ghats visit and local temples.";
+    }
+
+    if (text.includes("coorg") && (text.includes("price") || text.includes("cost"))) {
+      return "💰 The Coorg tour is ₹7299 with coffee plantation and waterfalls!";
+    }
+
+    if (text.includes("how do i book") || text.includes("book") || text.includes("booking")) {
+      return "🧾 You can book this tour using the form on the right or the 'Book Now' button at the bottom of the page.";
+    }
+
+    if (text.includes("contact") || text.includes("support")) {
+      return "📞 Please email us at support@packyourbags.com or message on Instagram!";
+    }
+
+    if (text.includes("hello") || text.includes("hi")) {
+      return "👋 Hello! I'm your travel assistant. Ask me about itinerary, price or how to book!";
+    }
+
+    return "🤖 I'm a demo assistant! Try asking about the itinerary, price, or how to book.";
+  }
+</script>
+
+</body>
 </html>
+
+
+
+
+<section class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>about us</h3>
+            <p>SVIT, Mahbub College Campus, Patny Center, S.D.Road, Secunderabad-500003.</p>
+        </div>
+        <div class="box">
+            <h3>branch location</h3>
+            <a href="">hyderabad</a>
+            <a href="">chennai</a>
+            <a href="">mumbai</a>
+            <a href="">pune</a>
+            <a href="">delhi</a>
+            <a href="">bangalore</a>
+         </div>
+         <div class="box">
+            <h3>quick links</h3>
+            <a href="">home</a>
+            <a href="">book</a>
+            <a href="">packages</a>
+            <a href="">services</a>
+            <a href="">gallery</a>
+            <a href="">review</a> 
+            <a href="">contact</a>
+         </div>
+         <div class="box">
+            <h3>follow us
+            <a href="">facebook
+            <a href="">instagram
+            <a href="">X</a>
+            <a href="">LinkedIn
+         </div>
+
+    </div>
+
+    <h1 class="credit"> created by<span> Fantastic four </span>all rights reserved!</h1>
+</section>
+
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="home-profile.js"></script>
+
+<!-- custom js file link -->
+ <script src="script.js"></script> 
+
+ 
+
+</body>
+</html>
+

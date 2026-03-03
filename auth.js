@@ -126,7 +126,7 @@ async function login() {
         const email = await resolveEmailForLogin(identifier);
         await auth.signInWithEmailAndPassword(email, password);
         alert("Login successful");
-        window.location = "home.html";
+        window.location = "index.html";
     } catch (error) {
         if (isOfflineError(error)) {
             alert("Cannot reach Firebase right now. Check internet and try again.");
@@ -154,3 +154,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+

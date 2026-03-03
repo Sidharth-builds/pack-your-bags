@@ -67,7 +67,7 @@ A full-stack travel booking web application built using HTML, CSS, JavaScript, a
 
 **Sidharth**  
 Computer Science Student  
-Aspiring Full Stack Developer
+Aspiring Software Developer
 
 ---
 

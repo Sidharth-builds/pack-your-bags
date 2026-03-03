@@ -1,0 +1,39 @@
+.profile-popup {
+    position: absolute;
+    top: 100%;
+    right: 9%;
+    width: 24rem;
+    background: #fff;
+    border-radius: .8rem;
+    padding: 1.2rem;
+    box-shadow: 0 .8rem 2rem rgba(0, 0, 0, .2);
+    display: none;
+    z-index: 1002;
+}
+
+.profile-popup.active {
+    display: block;
+}
+
+.profile-popup h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: .5rem;
+}
+
+.profile-popup .profile-name {
+    font-size: 1.4rem;
+    color: #666;
+    margin-bottom: .8rem;
+}
+
+.profile-popup a {
+    display: block;
+    font-size: 1.5rem;
+    color: #333;
+    padding: .6rem 0;
+}
+
+.profile-popup a:hover {
+    color: #ffa500;
+}

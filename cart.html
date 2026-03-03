@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Pack Your Bags</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <main class="cart-page">
+        <section class="cart-card">
+            <h1>Your Cart</h1>
+
+            <div id="packageList" class="package-list">
+                <div class="package-item">
+                    <div>
+                        <p class="package-name">Pondicherry</p>
+                        <p class="package-price">Rs 6999</p>
+                    </div>
+                    <button onclick="addToCart('Pondicherry', 6999, 'images/pondicherry.jpg')">Add</button>
+                </div>
+                <div class="package-item">
+                    <div>
+                        <p class="package-name">Manali</p>
+                        <p class="package-price">Rs 19999</p>
+                    </div>
+                    <button onclick="addToCart('Manali', 19999, 'images/manali.jpg')">Add</button>
+                </div>
+                <div class="package-item">
+                    <div>
+                        <p class="package-name">Coorg</p>
+                        <p class="package-price">Rs 8999</p>
+                    </div>
+                    <button onclick="addToCart('Coorg', 8999, 'images/coorg.jpg')">Add</button>
+                </div>
+                <div class="package-item">
+                    <div>
+                        <p class="package-name">Varanasi</p>
+                        <p class="package-price">Rs 11999</p>
+                    </div>
+                    <button onclick="addToCart('Varanasi', 11999, 'images/varanasi.jpg')">Add</button>
+                </div>
+            </div>
+
+            <div id="cartItems" class="cart-items"></div>
+
+            <div class="cart-footer">
+                <p id="cartTotal">Total: Rs 0</p>
+                <button id="checkoutBtn" class="checkout-btn">Checkout</button>
+            </div>
+
+            <a class="back-link" href="home.html">Back to Home</a>
+        </section>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="auth.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

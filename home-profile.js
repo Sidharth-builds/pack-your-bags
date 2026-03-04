@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     firebase.auth().onAuthStateChanged((user) => {
         if (!user) {
-            window.location = "login.html";
+            window.location = "account.html";
         }
     });
 

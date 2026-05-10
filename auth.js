@@ -48,6 +48,24 @@ async function usernameExists(username) {
     return usernameDoc.exists;
 }
 
+function sanitizeUsername(value) {
+    return value.trim().replace(/[^a-zA-Z0-9._-]/g, "_").toLowerCase();
+}
+
+async function generateUsername(base) {
+    let candidate = sanitizeUsername(base);
+    if (!candidate) {
+        candidate = "user" + Math.floor(Math.random() * 10000);
+    }
+
+    let suffix = 0;
+    while (await usernameExists(candidate + (suffix || ""))) {
+        suffix += 1;
+    }
+
+    return candidate + (suffix || "");
+}
+
 async function signup() {
     if (!requireOnline()) {
         return;
@@ -109,6 +127,93 @@ async function signup() {
     }
 }
 
+async function createUserRecordsForGoogle(user, providedUsername) {
+    const userDoc = await db.collection("users").doc(user.uid).get();
+    if (userDoc.exists) {
+        return;
+    }
+
+    const email = user.email || "";
+    const fullName = user.displayName || email.split("@")[0] || "Google User";
+    let username = sanitizeUsername(providedUsername || fullName || email.split("@")[0] || "user");
+    if (!username || await usernameExists(username)) {
+        username = await generateUsername(email.split("@")[0] || fullName || "user");
+    }
+
+    await db.collection("users").doc(user.uid).set({
+        uid: user.uid,
+        fullName,
+        username,
+        usernameLower: username.toLowerCase(),
+        email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    await db.collection("usernames").doc(username.toLowerCase()).set({
+        uid: user.uid,
+        username,
+        usernameLower: username.toLowerCase(),
+        email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+}
+
+async function signUpWithGoogle() {
+    if (!requireOnline()) {
+        return;
+    }
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    try {
+        const result = await auth.signInWithPopup(provider);
+        const user = result.user;
+        if (!user) {
+            throw new Error("Google sign-in failed.");
+        }
+
+        const providedUsername = getValue("signup_username");
+        await createUserRecordsForGoogle(user, providedUsername);
+
+        alert("Google sign-in successful");
+        window.location = "index.html";
+    } catch (error) {
+        if (isOfflineError(error)) {
+            alert("Cannot reach Firebase right now. Check internet and try again.");
+            return;
+        }
+        alert(error.message || "Google signup failed.");
+        console.error(error);
+    }
+}
+
+async function signInWithGoogle() {
+    if (!requireOnline()) {
+        return;
+    }
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    try {
+        const result = await auth.signInWithPopup(provider);
+        const user = result.user;
+        if (!user) {
+            throw new Error("Google sign-in failed.");
+        }
+
+        await createUserRecordsForGoogle(user, getValue("login_identifier"));
+        alert("Google login successful");
+        window.location = "index.html";
+    } catch (error) {
+        if (isOfflineError(error)) {
+            alert("Cannot reach Firebase right now. Check internet and try again.");
+            return;
+        }
+        alert(error.message || "Google login failed.");
+        console.error(error);
+    }
+}
+
 async function login() {
     if (!requireOnline()) {
         return;
@@ -151,6 +256,22 @@ document.addEventListener("DOMContentLoaded", () => {
         loginForm.addEventListener("submit", (event) => {
             event.preventDefault();
             login();
+        });
+    }
+
+    const googleSignupBtn = document.getElementById("googleSignupBtn");
+    if (googleSignupBtn) {
+        googleSignupBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            signUpWithGoogle();
+        });
+    }
+
+    const googleLoginBtn = document.getElementById("googleLoginBtn");
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            signInWithGoogle();
         });
     }
 });

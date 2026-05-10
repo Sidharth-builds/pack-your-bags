@@ -103,6 +103,10 @@ body {
     font-weight: 600;
 }
 
+.wrapper .btn + .btn {
+    margin-top: 12px;
+}
+
 .wrapper .btn:hover {
     background: rgb(12, 184, 190);
     transform: translateY(-2px);

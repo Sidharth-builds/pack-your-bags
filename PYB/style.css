@@ -107,10 +107,30 @@ body {
     margin-top: 12px;
 }
 
+.wrapper .google-auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 2px solid rgba(0, 0, 0, 0.24);
+    color: #111111;
+}
+
+.wrapper .google-auth-btn i {
+    color: #db4437;
+    font-size: 21px;
+}
+
 .wrapper .btn:hover {
     background: rgb(12, 184, 190);
     transform: translateY(-2px);
     transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.wrapper .google-auth-btn:hover {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.42);
 }
 
 .wrapper .register-link {
